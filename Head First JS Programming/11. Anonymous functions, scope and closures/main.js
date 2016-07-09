@@ -10,8 +10,11 @@ window.onload = function(){
 
 window.onload = function() {
 		var button = document.getElementById("bake");
-		button.onclick = handleButton;
-}
+		button.onclick = function(){
+			console.log("Time to bake the cookies.");
+			cookies.bake(2500);
+		};
+};
 
 var cookies = {
 	instructions: "Preheat oven to 350...",
@@ -21,10 +24,7 @@ var cookies = {
 	}
 };
 
-function handleButton(){
-	console.log("Time to bake the cookies.");
-	cookies.bake(2500);
-}
+
 function done() {
 	alert("Cookies are ready, take them out to cool.");
 	console.log("Cooling the cookies.");
