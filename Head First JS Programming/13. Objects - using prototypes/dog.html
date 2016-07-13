@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice - Objects, using prototypes</title>
+	<script>
+	// constructor Dog
+		function Dog(name, breed, weight) {
+			this.name = name;
+			this.breed = breed;
+			this.weight = weight;
+		}
+	// Add properties and methods to the prototype.
+		Dog.prototype.species = "Canine";
+		Dog.prototype.bark = function(){
+			if(this.weight > 25){
+				console.log(this.name + " says Woof!");
+			} else {
+				console.log(this.name + " says Yip!");
+			}
+		};
+		Dog.prototype.run = function(){
+			console.log("Run!");
+		}
+		Dog.prototype.wag = function(){
+			console.log("Wag!");
+		}
+		
+	// create objects
+		var fido = new Dog("Fido", "Mixed", 38);
+		var fluffy = new Dog("Fluffy", "Poodle", 30);
+		var spot = new Dog("Spot", "Chihuahua", 10);
+		// object spot gets its own implementation of the method bark
+		spot.bark = function(){
+			console.log(this.name + " says WOOF!");
+		};
+		
+	// Test-drive
+		fido.bark();
+		fido.run();
+		fido.wag();
+		
+		fluffy.bark();
+		fluffy.run();
+		fluffy.wag();
+		
+		spot.bark();
+		spot.run();
+		spot.wag();
+		
+	// In the prototype add new method - sit
+		Dog.prototype.sit = function(){
+			console.log(this.name + " is now sitting");
+		};
+		
+	// Add new objects for testing
+		var barnaby = new Dog("Barnaby", "Basset Hound", 55);
+	// Test new method
+		barnaby.sit();
+	</script>
+</head>
+<body>
+
+</body>
+</html>
