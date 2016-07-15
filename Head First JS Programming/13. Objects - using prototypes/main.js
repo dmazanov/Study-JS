@@ -23,6 +23,7 @@ Robot.prototype.blinkLights = function(){
 	alert("Blink blink!");
 };
 
+
 var robby = new Robot("Robby", 1956, "Dr.Morbius");
 var rosie = new Robot("Rosie", 1962, "George Jetson");
 
@@ -49,6 +50,14 @@ robby.makeCoffee();
 robby.blinkLights();
 
 rosie.cleanHouse();
+
+// override the toString method and write an implementation that creates a line specifically for objects Robot
+Robot.prototype.toString = function(){
+	return this.name + " Robot belonging to " + this.owner;
+};
+
+var toy = new Robot("Toy", 2013, "Avary");
+console.log(toy.toString());
 
 
 //Exercise
@@ -80,4 +89,8 @@ simon.blinkLights();
 simon.speak();
 
 
-
+// The properties of the Object that override is NOT RECOMMENDED:
+// constructor
+// hasOwnProperty
+// isPrototypeOf
+// propertyIsEnumerable
