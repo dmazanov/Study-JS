@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice</title>
+	<script>
+// 1 solution
+		function countBs (string) {
+			var symbol = "B";
+			var count = 0;
+			for(var i = 0; i < string.length; i++){
+				if (string.charAt(i) == symbol){
+				  count += 1;
+				}
+			}
+			return count;
+		}
+		function countChar(string, symbol) {
+			var count = 0;
+			for(var i = 0; i < string.length; i++){
+				if (string.charAt(i) == symbol){
+				  count += 1;
+				}
+			}
+			return count;
+		}
+		console.log(countBs("BBC"));
+		// → 2
+		console.log(countChar("kakkerlak", "k"));
+		// → 4
+		
+// 2 solution
+	function countChar(string, ch) {
+		var count = 0;
+		for (var i = 0; i < string.length; i++) {
+			if(string.charAt(i) == ch)
+				count += 1;
+		}
+		return count;
+	}
+	
+	function countBs(string) {
+		return countChar(string, "B");
+	}
+	
+	</script>
+</head>
+<body>
+
+</body>
+</html>
