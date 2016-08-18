@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice</title>
+	<script>
+		function range(start, end, step) {
+			if(step == null) step = 1;
+			var arrayRange = [];
+			if (step > 0) {
+				for(var i = start; i <= end; i += step)
+					arrayRange.push(i);	
+			} else {
+				for (var i = start; i >= end; i += step)
+					arrayRange.push(i);
+			}
+			return arrayRange;
+		}
+		
+	
+		function sum (array) {
+			var result = 0;
+			for (var i = 0; i < array.length; i++) {
+				result += array[i];
+			}
+			return result;
+		}
+		
+		console.log(range(1, 10));
+		console.log(sum(range(1, 10)));
+		console.log(range(5, 2, -1));
+	</script>
+</head>
+<body>
+
+</body>
+</html>
