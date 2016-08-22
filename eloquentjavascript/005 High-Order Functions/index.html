@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice</title>
+	<script>
+		function forEach(array, action) {
+			for (var i = 0; i < array.length; i++)
+				action(array[i]);
+		}
+		forEach([1,2,3], console.log);
+		// -> 1
+		// -> 2
+		// -> 3
+		
+		var numbers = [1,2,3,4,5], sum = 0;
+		forEach(numbers, function(number) {
+			sum += number;
+		});
+		console.log(sum);
+		// -> 15
+	</script>
+</head>
+<body>
+
+</body>
+</html>

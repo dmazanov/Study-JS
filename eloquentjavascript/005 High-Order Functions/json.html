@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice</title>
+	<script>
+	// function JSON.stringify & JSON.parse
+		var string = JSON.stringify({name: "X", born: 1980});
+		console.log(string);
+		// -> {"name":"X","born":1980}
+		console.log(JSON.parse(string).born);
+		// -> 1980
+		
+		var ancestry = JSON.parse(ANSESTRY_FILE);
+		console.log(ancestry.length);
+		// -> 39
+	</script>
+</head>
+<body>
+
+</body>
+</html>
