@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS  Practice</title>
+	<script>
+	"use strict";
+	/*----- Creating a regular expression -----*/
+	
+	//first way:
+	var re1 = new RegExp("abc");
+	
+	//second way;
+	var re2 = /abc/;
+	
+	
+	//Testing for matches
+	console.log(/abc/.test("abcde")); // -> true
+	console.log(/abc/.test("abxde")); // -> false
+	
+	/*----- Testing for matches -----*/
+	console.log( /[0123456789]/.test("in 1992") ); // -> true
+	console.log( /[0-9]/.test("in 1992") ); // -> true
+	
+	// У нескольких групп символов есть свои встроенные сокращения:
+/*
+	\d - Любая цифра
+	\w - Алфавитно-цифровой символ
+	\s - Пробельный символ (пробел, табуляция, перевод строки, и т.п.)
+	\D - не цифра
+	\W - не алфавитно-цифровой символ
+	\S - не пробельный символ. Любой символ, кроме перевода строки
+*/
+	// Таким образом можно задать формат даты и времени вроде 30-01-2003 15:20
+	// следующим выражением:
+	var dateTime = /\d\d-\d\d-\d\d\d\d \d\d:\d\d/;
+	console.log(dateTime.test("04-09-2016 14:45")); // -> true
+	console.log(dateTime.test("09-sep-2016 14:45")); // -> false
+	
+	// если надо найти любой символ, кроме тех, что есть в наборе – можно,
+	//  поставив знак ^ сразу после открывающей квадратной скобки
+	var notBinary = /[^01]/;
+	console.log(notBinary.test("1100100010100110")); // -> false
+	console.log(notBinary.test("1100100010200110")); // -> true
+	
+	//Repeating parts of a pattern
+	//When you put a plus sign (+) after something in a regular expression,
+    // it indicates that the element may be repeated more than once. 
+	// Thus, /\d+/ matches one or more digit characters.
+	console.log(/'\d+'/.test("'123'")); // -> true
+	console.log(/'d+'/.test("''")); // -> false
+	console.log(/'\d*'/.test("'123'")); // ->  true
+	console.log(/'\d*'/.test("''")); // -> true
+	
+	// У звёздочки * значение почти такое же, но она разрешает шаблону
+    // присутствовать ноль раз. Если после чего-то стоит звёздочка, то оно никогда
+    // не препятствует нахождению шаблона в строке – оно просто находится там
+    // ноль раз.
+	
+	// Знак вопроса ? - делает часть шаблона необязательной, то есть она может
+	// встретиться ноль или один раз. В следующем примере символ u может
+	// встречаться, но шаблон совпадает и тогда, когда его нет.
+	var neighbor = /neighbou?r/;
+	console.log(neighbor.test("neighbour")); // -> true
+	console.log(neighbor.test("neighbor")); // -> true
+	
+	/*
+		Чтобы задать точное количество раз, которое шаблон должен встретиться,
+		используются фигурные скобки. {4} после элемента означает, что он должен
+		встретиться в строке 4 раза. Также можно задать промежуток: {2,4} означает,
+		что элемент должен встретиться не менее 2 и не более 4 раз.
+	*/
+	
+	var dateTime = /\d{1,2}-\d{1,2}-\d{4} \d{1,2}:\d{2}/;
+	console.log(dateTime.test("04-09-2016 15:05")); // -> true
+	
+	// Можно использовать промежутки с открытым концом, опуская одно из чисел.
+	// {,5} означает, что шаблон может встретиться от нуля до пяти раз,
+	// а {5,} – от пяти и более.
+	
+	
+	/*---------- Grouping subexpressions ---------*/
+	var cartoonCrying = /boo+(hoo+)+/i;
+	console.log(cartoonCrying.test("Boohoooohoohooo")); // -> true
+	// Первый и второй плюсы относятся только ко вторым буквам о в словах boo и
+    // hoo. Третий + относится к целой группе (hoo+), находя одну или несколько
+    // таких последовательностей.
+	
+	// Буква i в конце выражения делает регулярку нечувствительной к регистру
+    // симолов – так, что B совпадает с b.
+	
+	/*----------- Matches and groups (method - exec)-----------*/
+	
+	//The test method is the absolute simplest way to match a regular expression. 
+	// It tells you only whether it matched and nothing else. 
+	// Regular expressions also have an exec (execute) method that will return null 
+	// if no match was found and return an object with information about the match otherwise.
+	var match = /\d+/.exec("one two 100");
+	console.log(match); // -> ["100"]
+	console.log(match.index); // -> 8
+	
+	// String values have a "match" method that behaves similarly.
+	console.log("one two 100".match(/\d+/)); // -> ["100", index: 8, input: "one two 100"]
+	
+	var quotedText = /'([^']*)'/;
+	console.log(quotedText.exec("she said 'hello'")); 
+// -> ["'hello'", "hello", index: 9, input: "she said 'hello'"]
+	
+	console.log(/bad(ly)?/.exec("bad"));
+// -> ["bad", undefined, index: 0, input: "bad"]
+	console.log(/(\d)+/.exec("123"));
+// -> ["123", "3"]	
+	
+	
+	/*---------- The date type ---------*/
+	console.log(new Date());
+	
+	console.log(new Date(2015, 9, 21));
+	console.log(new Date(2009, 11, 9, 12, 59, 59, 999));
+	
+	function findDate(string){
+		var dateTime = /(\d{1,2})-(\d{1,2})-(\d{4})/;
+		var match = dateTime.exec(string);
+		return new Date(Number(match[3]),
+						Number(match[2]) - 1,
+						Number(match[1]));
+	}
+	console.log(findDate("30-1-2003"));
+// ->  Thu Jan 30 2003 00:00:00 GMT+0100
+	
+	
+	/*---------- Word and string boundaries ---------*/
+	console.log(/cat/.test("concatenate"));
+// -> true
+	console.log(/\bcat\b/.test("concatenate"));
+// -> false
+
+	
+	/*--------- Choice patterns ---------*/
+	var animalCount = /\b\d+ (pig|cow|chicken)s?\b/;
+	console.log(animalCount.test("15 pigs"));
+// -> true
+	console.log(animalCount.test("15 pigchickens"));
+// -> false
+	
+
+	
+	</script>
+</head>
+<body>
+
+</body>
+</html>
